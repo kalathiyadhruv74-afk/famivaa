@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html { scroll-behavior: smooth; }
   body {
-    @apply bg-slate-50 text-slate-800 font-sans selection:bg-purple-600 selection:text-white;
+    @apply bg-[#fbfaff] text-slate-800 font-sans selection:bg-violet-600 selection:text-white;
   }
 }
 
@@ -19,6 +20,12 @@
 .glass-header {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
+}
+
+.brand-grid {
+  background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
 }
 
 /* Custom Scrollbar */

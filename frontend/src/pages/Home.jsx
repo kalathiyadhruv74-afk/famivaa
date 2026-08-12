@@ -66,33 +66,35 @@ export const Home = () => {
   ];
 
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-20 pb-20">
       
       {/* 1. HERO SECTION */}
-      <section className="gradient-hero text-white py-20 lg:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <section className="relative overflow-hidden bg-[#0b0811] text-white">
+        <div className="brand-grid absolute inset-0"></div>
+        <div className="absolute -left-32 top-12 h-80 w-80 rounded-full bg-violet-700/20 blur-3xl"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl space-y-6">
+          <div className="flex min-h-[620px] items-center py-16 lg:py-20">
+          <div className="max-w-4xl space-y-7">
             
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold text-purple-200 border border-white/20">
+            <div className="inline-flex items-center space-x-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-4 py-2 text-xs font-semibold text-violet-200 backdrop-blur-md">
               <Award className="w-4 h-4 text-purple-300" />
               <span>Leading B2B Pharmaceutical Partner</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight font-sans">
-              Healthcare Solutions <br />
-              <span className="text-purple-300">You Can Trust</span>
+            <h1 className="text-4xl font-black leading-[1.06] tracking-[-0.045em] sm:text-5xl lg:text-[4.25rem]">
+              Better medicine.<br />
+              <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-violet-400 bg-clip-text text-transparent">Stronger partnerships.</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-purple-100/90 leading-relaxed font-light">
+            <p className="max-w-3xl text-base leading-relaxed text-violet-100/70 sm:text-lg">
               Delivering quality pharmaceutical products and reliable healthcare formulations to medical professionals, clinics, hospitals, pharmacies, and distribution businesses.
             </p>
 
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Link
                 to="/medicines"
-                className="flex items-center justify-center space-x-2 bg-purple-500 hover:bg-purple-400 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-purple-900/40 transition-all text-base"
+                className="flex items-center justify-center space-x-2 rounded-xl bg-violet-600 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-violet-950/50 transition-all hover:-translate-y-0.5 hover:bg-violet-500"
               >
                 <span>Explore Medicines</span>
                 <ArrowRight className="w-5 h-5" />
@@ -106,7 +108,7 @@ export const Home = () => {
               </Link>
             </div>
 
-            <div className="pt-6 grid grid-cols-3 gap-4 border-t border-white/15 text-xs text-purple-200">
+            <div className="grid max-w-2xl grid-cols-3 gap-4 border-t border-white/10 pt-7 text-xs text-violet-300/80">
               <div>
                 <div className="font-bold text-white text-lg sm:text-xl">50+</div>
                 <div>Formulations</div>
@@ -122,18 +124,20 @@ export const Home = () => {
             </div>
 
           </div>
+
+          </div>
         </div>
       </section>
 
       {/* 2. ABOUT SUMMARY SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 lg:p-12 border border-purple-100 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 items-center gap-10 rounded-[2rem] border border-violet-100 bg-white p-8 shadow-[0_20px_70px_rgba(76,29,149,.08)] lg:grid-cols-12 lg:p-12">
           
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center space-x-2 text-purple-700 text-xs font-bold uppercase tracking-wider bg-purple-50 px-3 py-1 rounded-md">
               <span>About Famivaa Healthcare</span>
             </div>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl font-extrabold tracking-[-0.035em] text-slate-950 lg:text-4xl">
               Dedicated B2B Partner to the Medical Profession
             </h2>
             <p className="text-slate-600 leading-relaxed">
@@ -204,7 +208,7 @@ export const Home = () => {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-purple-100/80 shadow-sm hover:shadow-md hover:border-purple-300 transition-all space-y-4"
+                className="group space-y-4 rounded-2xl border border-violet-100/80 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-violet-300 hover:shadow-[0_18px_45px_rgba(76,29,149,.10)]"
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.color}`}>
                   <Icon className="w-6 h-6" />
@@ -250,7 +254,7 @@ export const Home = () => {
 
       {/* 5. CONTACT CTA SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-purple-950 via-purple-900 to-indigo-950 rounded-3xl p-8 lg:p-12 text-white text-center space-y-6 shadow-xl relative overflow-hidden">
+        <div className="relative space-y-6 overflow-hidden rounded-[2rem] border border-violet-400/15 bg-[#10091d] p-8 text-center text-white shadow-2xl lg:p-14">
           <div className="max-w-2xl mx-auto space-y-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold">
               Interested in Our Pharmaceutical Products?

@@ -20,7 +20,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <div className="flex flex-col min-h-screen bg-slate-50 font-sans antialiased text-slate-800">
+        <div className="flex flex-col min-h-screen bg-[#fbfaff] font-sans antialiased text-slate-800">
           <Navbar />
           <main className="flex-grow">
             <Routes>
