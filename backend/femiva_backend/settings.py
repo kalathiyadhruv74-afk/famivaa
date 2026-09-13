@@ -13,7 +13,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'famivaa-default-insecure-secret-key-2026-p
 
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
+default_hosts = ['localhost', '127.0.0.1', 'famivaa.onrender.com', '.onrender.com']
+custom_hosts = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '').split(',') if host.strip()]
+ALLOWED_HOSTS = list(set(default_hosts + custom_hosts))
 
 # Application definition
 INSTALLED_APPS = [
@@ -161,7 +163,31 @@ SIMPLE_JWT = {
 }
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = [
-    origin.strip() for origin in os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',') if origin.strip()
+default_cors_origins = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://famivaa.vercel.app',
+    'https://famivaa.onrender.com',
 ]
+custom_cors = [origin.strip() for origin in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',') if origin.strip()]
+CORS_ALLOWED_ORIGINS = list(set(default_cors_origins + custom_cors))
+
+# Regex to allow any Vercel preview branch or Render URL
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+    r"^https://.*\.onrender\.com$",
+]
+
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF Trusted Origins (required for Django admin and secure forms)
+default_csrf_origins = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://famivaa.vercel.app',
+    'https://*.vercel.app',
+    'https://famivaa.onrender.com',
+    'https://*.onrender.com',
+]
+custom_csrf = [origin.strip() for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
+CSRF_TRUSTED_ORIGINS = list(set(default_csrf_origins + custom_csrf))
