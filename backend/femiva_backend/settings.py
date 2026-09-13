@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from datetime import timedelta
 import dotenv
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,8 +66,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'femiva_backend.wsgi.application'
 
 # Database Configuration (PostgreSQL when configured, fallback to SQLite for local dev)
+DATABASE_URL = os.getenv('DATABASE_URL')
 DB_ENGINE = os.getenv('DB_ENGINE', '')
-if DB_ENGINE:
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+elif DB_ENGINE:
     DATABASES = {
         'default': {
             'ENGINE': DB_ENGINE,
@@ -110,6 +122,7 @@ USE_TZ = True
 # Static & Media Files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
