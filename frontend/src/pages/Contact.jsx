@@ -71,14 +71,25 @@ export const Contact = () => {
       });
     } catch (err) {
       console.error('Contact submission error:', err);
+      let errorMsg = 'Failed to send enquiry. Please check your connection and try again.';
       if (err.response?.data) {
         const errors = err.response.data;
-        const firstErrorKey = Object.keys(errors)[0];
-        const errorMsg = Array.isArray(errors[firstErrorKey]) ? errors[firstErrorKey][0] : errors[firstErrorKey];
-        setError(`${firstErrorKey}: ${errorMsg}`);
-      } else {
-        setError('Failed to send enquiry. Please check your connection and try again.');
+        if (typeof errors === 'string') {
+          errorMsg = errors;
+        } else if (typeof errors.detail === 'string') {
+          errorMsg = errors.detail;
+        } else if (typeof errors.error === 'string') {
+          errorMsg = errors.error;
+        } else if (typeof errors === 'object') {
+          const firstErrorKey = Object.keys(errors)[0];
+          const raw = errors[firstErrorKey];
+          const val = Array.isArray(raw) ? (typeof raw[0] === 'string' ? raw[0] : JSON.stringify(raw[0])) : (typeof raw === 'string' ? raw : (raw?.message || JSON.stringify(raw)));
+          errorMsg = `${firstErrorKey}: ${val}`;
+        }
+      } else if (err.message) {
+        errorMsg = err.message;
       }
+      setError(errorMsg);
     } finally {
       setSubmitting(false);
     }

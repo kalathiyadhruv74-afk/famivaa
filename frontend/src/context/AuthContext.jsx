@@ -3,6 +3,12 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
+// Base API URL configuration for production deployment (e.g. Render / Vercel)
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+if (apiBaseUrl) {
+  axios.defaults.baseURL = apiBaseUrl;
+}
+
 // Set initial Authorization header immediately if token exists in localStorage
 const storedToken = localStorage.getItem('famivaa_access_token');
 if (storedToken) {

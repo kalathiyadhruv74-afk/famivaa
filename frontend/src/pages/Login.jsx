@@ -28,11 +28,38 @@ export const Login = () => {
       }
     } catch (err) {
       console.error('Login error:', err);
-      if (err.response?.data?.error) {
-        setError(err.response.data.error);
-      } else {
-        setError('Invalid email or password. Please verify your credentials.');
+      let errorMsg = 'Invalid email or password. Please verify your credentials.';
+      if (err.response?.data) {
+        const data = err.response.data;
+        if (typeof data === 'string') {
+          errorMsg = data;
+        } else if (typeof data.error === 'string') {
+          errorMsg = data.error;
+        } else if (typeof data.detail === 'string') {
+          errorMsg = data.detail;
+        } else if (typeof data.message === 'string') {
+          errorMsg = data.message;
+        } else if (data.error && typeof data.error === 'object') {
+          errorMsg = data.error.message || JSON.stringify(data.error);
+        } else if (typeof data === 'object') {
+          const values = Object.values(data);
+          if (values.length > 0) {
+            const firstVal = values[0];
+            if (typeof firstVal === 'string') {
+              errorMsg = firstVal;
+            } else if (Array.isArray(firstVal) && typeof firstVal[0] === 'string') {
+              errorMsg = firstVal[0];
+            } else if (typeof firstVal === 'object' && firstVal?.message) {
+              errorMsg = firstVal.message;
+            } else {
+              errorMsg = JSON.stringify(firstVal);
+            }
+          }
+        }
+      } else if (err.message) {
+        errorMsg = err.message;
       }
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
